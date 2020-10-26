@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <script src="flocking-all.min.js"></script>
+    </head>
+    <body>
+        <script> 
+            var synth = flock.synth({
+                synthDef: {
+                    ugen: "flock.ugen.sinOsc",
+                    freq: 440,
+                    mul: 0.25
+                }
+            });
+
+        </script>
+
+        <button onclick="synth.play()">Start Playing</button>
+    </body>
+</html>
