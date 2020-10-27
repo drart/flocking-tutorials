@@ -10,6 +10,8 @@ Go to the Flocking Playground and run the examples: https://flockingjs.org/demos
 
 Open up your favourite text editor and type out a basic webpage. Put the example in a script tag. Open it up in a web browser. If you are lucky this won't work. 
 
+We will combine this: 
+
     flock.synth({
         synthDef: {
             ugen: "flock.ugen.sinOsc",
@@ -17,6 +19,35 @@ Open up your favourite text editor and type out a basic webpage. Put the example
             mul: 0.25
         }
     });
+
+With this: 
+
+    <html>
+        <head>
+        </head>
+        <body>
+        </body>
+    </html>
+
+And we get this: 
+
+
+    <html>
+        <head>
+        </head>
+        <body>
+            <script>
+                flock.synth({
+                    synthDef: {
+                    ugen: "flock.ugen.sinOsc",
+                    freq: 440,
+                    mul: 0.25
+                    }
+                });
+            </script>
+        </body>
+    </html>
+
 
 ## Step 3: Add the Flocking.js library to your sketch
 
@@ -31,3 +62,41 @@ At this point your sketch will also not work.
 ## Step 4: Putting it all together
 
 We have Flocking.js and we have a demo. We have two more problems to solve: we need to tell Flocking.js to start playing and we need to create a user action in order for the browser to allow our program access to the sound on our webpage. 
+
+In order to tell Flocking.js to play we can call the `play` method of our synth. First we need to store the result of the `flock.synth` expression into a variable and then invoke the method afterwards.
+
+
+    var synth = flock.synth({
+        synthDef: {
+            ugen: "flock.ugen.sinOsc",
+            freq: 440,
+            mul: 0.25
+        }
+    });
+    synth.play();
+
+You may have a browser where this will now work, but most modern browsers have put in a policy that prevents audio from playing on a page without user interaciton, so we are going to add a button to our page and move our call to the `play` method to happen when that button gets clicked.
+
+    <button onclick="synth.play()"> Start Sketch </button>
+
+Now we have our complete example: 
+
+    <html>
+        <head>
+            <script src="flocking-all.min.js"></script>
+        </head>
+        <body>
+            <script> 
+                var synth = flock.synth({
+                    synthDef: {
+                        ugen: "flock.ugen.sinOsc",
+                        freq: 440,
+                        mul: 0.25
+                    }
+                });
+
+            </script>
+
+            <button onclick="synth.play()">Start Playing</button>
+        </body>
+    </html>
