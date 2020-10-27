@@ -1,0 +1,38 @@
+
+<html>
+    <head>
+        <script src="flocking-all.min.js"></script>
+    </head>
+    <body>
+        <script> 
+            var synth1 = flock.synth({
+                addToEnvironment: false,
+                synthDef: {
+                    ugen: "flock.ugen.sinOsc",
+                    freq: 440,
+                    mul: 0.25
+                }
+            });
+
+            var synth2 = flock.synth({
+                addToEnvironment: false,
+                synthDef: {
+                    ugen: "flock.ugen.sinOsc",
+                    freq: 430,
+                    mul: 0.25
+                }
+            });
+
+            function toggleOnOrOff(synth){
+                if (synth.isPlaying()){
+                    synth.pause();
+                }else{
+                    synth.play();
+                }
+            }
+        </script>
+
+        <button onclick="toggleOnOrOff(synth1)">Synth 1</button>
+        <button onclick="toggleOnOrOff(synth2)">Synth 2</button>
+    </body>
+</html>

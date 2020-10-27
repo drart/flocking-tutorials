@@ -1,0 +1,34 @@
+
+<html>
+    <head>
+        <script src="flocking-all.min.js"></script>
+        <script src="NexusUI.js"></script>
+
+    </head>
+    <body>
+        <div id="freq"><div>
+        <div id="synth"><div>
+
+        <script> 
+            var synth = flock.synth({
+                synthDef: {
+                    id: "mysineosc",
+                    ugen: "flock.ugen.sinOsc",
+                    freq: 440,
+                    mul: 0.25
+                }
+            });
+
+            var synthui = new Nexus.Toggle("#synth");
+            synthui.on('change',function(v) {
+                v ? synth.play() : synth.pause();
+            });
+
+
+            var frequi = new Nexus.Slider("#freq");
+            frequi.on('change', function(v) {
+                synth.set("mysineosc.freq", v * 500 + 100 );
+            });
+        </script>
+    </body>
+</html>
