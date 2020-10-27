@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <script src="flocking-all.min.js"></script>
+    </head>
+    <body>
+        <button id="mybutton" onclick="sampler.play()">Start Playing</button>
+        <script> 
+
+            var sampler = flock.synth({
+                synthDef: {
+                    ugen: "flock.ugen.playBuffer",
+                    buffer: {
+                        id: "chord",
+                        url: "C4.wav"
+                    },
+
+                    trigger: {
+                        ugen: "flock.ugen.mouse.click",
+                        options: {
+                            target: "#mybutton"
+                        }
+                    },
+
+                    loop: 0,
+                }
+            });
+
+
+        </script>
+
+    </body>
+</html>
